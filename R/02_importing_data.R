@@ -22,7 +22,7 @@ length(data_list)
 # Inspecting data
 head(data_list$envir)
 dim(data_list$envir)
-summary(envir$envir)
+summary(data_list$envir)
 
 # Output 1: summary table ------------------------------------------------------
 
@@ -62,7 +62,7 @@ head(comm)
 
 # Sum of species abundances across sites
 comm_sum <- apply(comm[, -1], 2, sum)
-colSums(comm[, -1])
+colSums(comm[, -1]) # does the same thing as line above
 
 # Plotting a species abundance curve
 plot(sort(comm_sum, decreasing = TRUE), las = 1, bty = "l",
