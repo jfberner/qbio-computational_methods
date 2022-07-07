@@ -18,3 +18,6 @@ project/
 In the `R` directory you will find the scripts. Let's start using R!
 
 This sentence is the first comit jfb has ever done. History's being made right here.
+Try this one
+
+Now, try again to compare the threeo of them
