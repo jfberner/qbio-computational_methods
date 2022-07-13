@@ -17,11 +17,11 @@ summary(iris)
 table(iris$Species)
 
 # sepal length mean per species
-tapply(X = iris$Sepal.Length, INDEX = list(iris$Species), FUN = mean)
+tapply(X = iris$Sepal.Length, INDEX = list(iris$Species), FUN = mean) #output is "array"
 # the same operation, using another function, other arguments and other output
-aggregate(x = iris$Sepal.Length, by = list(iris$Species), FUN = mean)
+aggregate(x = iris$Sepal.Length, by = list(iris$Species), FUN = mean) #output is "data.frame"
 # still the same operation, the same function but a different notation
-aggregate(Sepal.Length ~ Species, data = iris, mean)
+aggregate(Sepal.Length ~ Species, data = iris, mean) #output is "data.frame"
 
 
 ## NAs and zeroes --------------------------------------------------------------
@@ -49,7 +49,7 @@ sd02
 sd01 == sd02
 
 
-cv <- function(x){
+cv <- function(x){ #coefficient of variation
   sd(x) / mean(x) * 100
 }
 apply(vars, 2, cv)
@@ -58,7 +58,7 @@ apply(vars, 2, cv)
 # quartiles (four quantiles)
 apply(vars, 2, quantile)
 # 5%, 50% e 95%
-apply(vars, 2, quantile, probs = c(0.05, 0.5, 0.95))
+apply(vars, 2, quantile, probs = c(0.05, 0.5, 0.95)) #probs used to tweak the quantiles, instead of the regular 0-25-50-75-100
 
 
 # range function return the min and max
@@ -147,8 +147,8 @@ iris[iris$Sepal.Width %in% outliers2 &
 
 par(mfrow = c(1, 3))
 qqnorm(iris$Sepal.Length[iris$Species == "setosa"],
-       main = "setosa")
-qqline(iris$Sepal.Length[iris$Species == "setosa"])
+       main = "setosa") #quantile plot for a particular variable. It compares theorerical and sampled quantiles. How much the data deviates from the line is a way to check if the data deviates from a normal distribution. Also used to explore the residuals from lineal models
+qqline(iris$Sepal.Length[iris$Species == "setosa"]) #just adding the line
 qqnorm(iris$Sepal.Length[iris$Species == "versicolor"],
        main = "versicolor")
 qqline(iris$Sepal.Length[iris$Species == "versicolor"])
