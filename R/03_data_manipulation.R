@@ -179,3 +179,9 @@ write.csv(x = comm_total,
 sp1 <- filter(comm_total, TaxCode == "sp1", Elev > 3)
 
 View(sp1)
+
+##### Extra - Fun by myself #####
+library(raster)
+havingfun <- comm_total
+coordinates(havingfun) <- ~X + Y
+proj4string(havingfun) <- projection(raster()) # need to figure out the projection system, paper says WGS84 UTM but it didn't work
