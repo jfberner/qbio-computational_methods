@@ -1,6 +1,6 @@
 ---
 title: 'Exporting graphics using R'
-date: "July 7th 2022"
+date: "r SysDate()"
 author: jfb
 output:
   html_document:
@@ -50,4 +50,4 @@ ggplot2::ggsave(filename = "../figs/species_abundance_ggplot.png",
                 width = 3.5, 
                 height = 3.5)
 ```
-
+# the things inside the {} at the beginning of this last section is a detailed description of the image, which is 'alternative text' for screen readers used as visual aids
