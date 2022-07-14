@@ -28,7 +28,7 @@ p <- ggplot(comm_df) +
   geom_point(mapping = aes(x = sp, y = n), size = 3, alpha = 0.5) +
   labs(x = "Species rank", y = "Abundance") +
   scale_y_continuous(breaks = n_breaks) +
-  annotate("text", x = 16, y = 126, label = "italic(Bolboschoenus~maritimus)", parse = TRUE, size = 2) +
+  annotate("text", x = 16, y = 126, label = "italic(Bolboschoenus~maritimus)", parse = TRUE, size = 2) + # to add the names of the points in the fig. If you want to plot "the two highest" or "the ones called X and Y", do that by passing to the X and Y by collumn names, you could do a loop for the two highest values that'll annotate the first two in an automatic number of x an y. If you just want to annotate the names of one point or another, look at the snippet at the end of this script
   annotate("text", x = 16, y = 80, label = "italic(Phalaris~coerulescenss)", parse = TRUE, size = 2) +
   theme_classic()
 
@@ -40,3 +40,17 @@ ggplot2::ggsave(filename = "./figs/species_abundance_ggplot.png", #use ../figs i
                 units = "in",
                 width = 3.5,
                 height = 3.5)
+
+
+
+##### Dando trabalho pra professora #####
+# annotate() further arguments
+
+comm_df$x2 <- comm_df$sp + 5
+comm_df$y2 <- comm_df$n + 2
+
+p2 <- ggplot(comm_df,aes(x = sp, y = n))+
+  geom_point()+
+  geom_text(aes(x = x2, y = y2,label = row.names(comm_df)))
+
+p2
