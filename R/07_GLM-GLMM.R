@@ -3,17 +3,18 @@
 # ICTP/Serrapilheira 2022
 # Inplementing glm and glmm in R
 # First version 2022-07-20
+# jfb
 # --------------------------------------------------#
 
 # Loading needed packages
-ibrary(dplyr)
+library(dplyr)
 library(lme4)
 library(merTools)
 library(ggplot2)
 
 
 # Going back to lm to fit a Gaussian glm ---------------------------------------
-f <- read.csv("data/raw/crawley_regression.csv")
+df <- read.csv("data/raw/crawley_regression.csv")
 
 lm(growth ~ tannin, data = df)
 
@@ -22,12 +23,17 @@ lm(growth ~ tannin, data = df)
 lm(growth ~ tannin, data = df, family = gaussian(link = identity))
 
 
-## -Cuckoo glm--- ---------------------------------------------------------------cuckoo <- read.csv("data/raw/valletta_cuckoo.csv")
+## -Cuckoo glm--- ---------------------------------------------------------------
+
+cuckoo <- read.csv("data/raw/valletta_cuckoo.csv")
+
 summary(cuckoo)
 
 
-## Visualizing the dataggplot(cuckoo, aes(x = Mass, y = Beg, colour = Species)) + 
-  geom_point() +
+## Visualizing the data
+
+ggplot(cuckoo, aes(x = Mass, y = Beg, colour = Species)) +
+geom_point() +
   theme_classic()
 
 
@@ -43,7 +49,7 @@ par(mfrow = c(1, 1))
 
 # Fitting a glm
 cuckoo_glm <- glm(Beg ~ Mass * Species, data = cuckoo,
-           family = poisson(link = log))
+                  family = poisson(link = log))
 
 
 summary(cuckoo_glm)
@@ -59,39 +65,42 @@ par(mfrow = c(1, 1))
 # Calculating the predicted values
 newdata <- expand.grid(Mass = seq(min(cuckoo$Mass), max(cuckoo$Mass), length.out = 200),
                        Species = unique(cuckoo$Species))
-newdata$Beg <- predict(cuckoo_glm, newdata, type = 'response')
+newdata$Beg <- predict(cuckoo_glm, newdata, type = 'response') # adding a new collumn with predicted values from cuckoo_glm
 
 ## explore ?predict.glm
 
 p <- ggplot(mapping = aes(x = Mass, y = Beg, colour = Species)) +
   geom_point(data = cuckoo) +  geom_line(data = newdata) +
-  mtheme_classic()
+  theme_classic()
 
-
+p
 
 
 # Bacterial growth -------------------------------------------------------------
-#ac <- read.csv("data/raw/valletta_bac.csv")
+bac <- read.csv("data/raw/valletta_bac.csv")
 
 bac$media <- as.factor(bac$media)
 bac$cabinet <- as.factor(bac$cabinet)
 
 bac_lm <- lm(growth ~ media, data = bac)
 
-ummary(bac_lm)
+summary(bac_lm)
 
 
-ac_lm2 <- lm(growth ~ media + cabinet, data = bac)
+bac_lm2 <- lm(growth ~ media + cabinet, data = bac)
 
-ummary(bac_lm2)
-
-
-# Building the mixed model with cabined as a random effect#ac_lmer <- lmer(growth ~ media + (1 | cabinet), data = bac)
-
-ummary(bac_lmer)
+summary(bac_lm2)
 
 
-## -Simulating the confidence interval of the residualsfeEx <- FEsim(bac_lmer, 1000)
+# Building the mixed model with cabined as a random effect#
+
+bac_lmer <- lmer(growth ~ media + (1 | cabinet), data = bac)
+
+summary(bac_lmer)
+
+
+## -Simulating the confidence interval of the residuals
+feEx <- FEsim(bac_lmer, 1000)
 
 
 fe <- plotFEsim(feEx) +
