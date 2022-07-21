@@ -87,17 +87,17 @@ RwMcPred <- function(t, y, p) {
 }
 
 # RwMc parameters
-c <- 3 #PconsumptionRate
-b <- 0.1 #c convertion coef
-tau <- 2 #manipulationTime
+c <- 2 #PconsumptionRate
+b <- 1 #c convertion coef
+tau <- 0.2 #manipulationTime
 d <- 0.2 #P deathRate
 a1 <- list(c(c,b,tau,d))
 # here we have to add the predation coefficients, c, b, tau and d which are consumption, converted consumption and manipulationTime and PdeathRate respectively
-r1 <- 2 # growthRate N
+r1 <- 10 # growthRate N
 p3 <- list(r1, a1)
-N1 <- c(500, 100)
+N1 <- c(5000, 100)
 t2 <- c(1:1000)
-K <- 1000
+K <- 15000
 
 out_RwMc <- ode(y = N1, times = t2, func = RwMcPred, parms = p3)
 
@@ -107,9 +107,16 @@ df_RwMc <- pivot_longer(as.data.frame(out_RwMc), cols = 2:3)
 
 #head(df_RwMc)
 
-ggplot(df_RwMc) +
+#tb_RwMc <- tibble(df_RwMc)
+#tb_RwMc$name == 1
+#prey <- list(tb_RwMc$name == 1)
+#predator <- list(tb_RwMc$name == 2)
+#replace(tb_RwMc$name,list = prey,values = 'Prey')
+# trying to change the name of 1 to prey and 2 to predator
+
+ggplot(tb_RwMc) +
   geom_line(aes(x = time, y = value, color = name)) +
   labs(x = "Time", y = "N", color = "Species") +
   theme_classic()
 
-# now is just tweaking parameters so the predators dont all die
+# now is just tweaking parameters so the predators don't all die
