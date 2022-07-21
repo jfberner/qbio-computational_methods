@@ -41,3 +41,4 @@ ggplot(covid) +
   theme_minimal() +
   labs(x = "Date", y = "New cases")
 
+# Easy Peasy
