@@ -42,3 +42,13 @@ ggplot(covid) +
   labs(x = "Date", y = "New cases")
 
 # Easy Peasy
+# cheatsheet for lubridate and Date Formats:
+# https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_lubridate.pdf
+
+covid$roll_mean <- zoo::rollmean(covid$new_confirmed,14,fill = NA)
+
+ggplot(covid) +
+  geom_line(aes(x = date, y = new_confirmed)) +
+  geom_line(aes(date,roll_mean,color='red'))
+  theme_minimal() +
+  labs(x = "Date", y = "New cases")
