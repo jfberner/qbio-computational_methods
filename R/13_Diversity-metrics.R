@@ -26,12 +26,25 @@ colnames(comm2)[max.col(comm2, ties.method = "first")]
 
 
 # Creating Functions for Shannon Diversity Index, Simpson's Diversity Index and Inverse Simpson
-shannon <- function()
+# the following are Ardrea's solutions
+shannon <- function(x){
+  pi <- x/sum(x)
+  H <-  -sum(pi * log(pi))
+}
 
+simpson <- function(x){
+  pi <- x/sum(x)
+  Simp <-  1 - sum(pi^2)
+}
 
+inv.simpson <- function(x){
+  pi <- x/sum(x)
+  inv.simp <-  1 / sum(pi^2)
+}
 
-simpson <- function()
-
-
-
-inverse.simpson <- function()
+diversity <- function(x,index){
+  pi <-  x/sum(x)
+  if (index == "shannon") d <- -sum(pi * log(pi))
+  if (index == "simpson") d <- 1 - sum(pi^2)
+  if (index == "invSimpson") d <- 1 / sum(pi^2)
+} # here we're supposing this is a numerical vector, and you have to put the output error if it isn't, we'll see a bit more about that
