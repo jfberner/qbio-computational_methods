@@ -123,11 +123,14 @@ for(i in 1:length(classification_data)){
 
 head(families)
 
-# trying lapply by myself - really want to learn this family
-families_apply <- lapply(classification_data, `[`, is.element(rank, species))
 
 
-# now she wants to use dated trees to establish the relationship between these families we have here
+
+# now she wants to use dated trees (APG from Magallón-UNAM) to establish the relationship between these families we have here
 # for that, packages ade4 and phytools are needed
 # APG <- read.tree('data/ray/R20120829mod.new')
 # plot(APG)# There's also ggtree() for this
+
+
+# trying lapply by myself - really want to learn this family
+families_apply <- lapply(classification_data, `[`, is.element(rank, species))
