@@ -1,14 +1,18 @@
 ---
 title: 'Scientific workflows: report'
 author:
-- Andrea Sánchez-Tapia ^*1*^, Sara R. Mortara^*1*^
-- ^*1*^ ¡liibre! laboratório independente de informática da biodiversidade e reprodutibilidade em ecologia
+- "Andrea Sánchez-Tapia ^*1*^, Sara R. Mortara^*1*^"
+- ^*1*^ ¡liibre! laboratório independente de informática da biodiversidade e reprodutibilidade
+  em ecologia
 date: "July 7th 2022"
 output:
   html_document:
     df_print: paged
+  pdf_document: default
 abstract: |
   it will be worth reading the report
+bibliography: ../docs/Mestrado.bib
+csl: ../docs/apa-old-doi-prefix.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -60,3 +64,11 @@ knitr::include_graphics("../figs/02_species_abundance.png")
 ## Discussion
 
 It is time to synthesize your results and relate your findings with theory. 
+
+## References
+
+Here, I want to cite some of the papers I used in my dissertation, like:
+
+@jimenezLeavingAreaReceiving2020
+@soares-filhoModellingConservationAmazon2006
+@urbina-cardonaSpeciesDistributionModeling2019
